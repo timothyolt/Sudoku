@@ -1,7 +1,7 @@
 // Copyright 2017 Timothy Oltjenbruns
 
-#ifndef SUDOKU_SUDOKUOPTIONS_H
-#define SUDOKU_SUDOKUOPTIONS_H
+#ifndef SUDOKU_SUDOKUOPTIONS_HPP_
+#define SUDOKU_SUDOKUOPTIONS_HPP_
 
 #include "Sudoku.hpp"
 
@@ -66,4 +66,4 @@ class SudokuOptions : Sudoku {
   bool containsOptions(size_t row, size_t column, value_t value) const;
 };
 
-#endif //SUDOKU_SUDOKUOPTIONS_H
+#endif  // SUDOKU_SUDOKUOPTIONS_HPP_

@@ -1,7 +1,14 @@
 cmake_minimum_required(VERSION 3.6)
-project(Sudoku)
+project(sudoku)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES Sudoku/main.cpp Sudoku/Sudoku.cpp Sudoku/Sudoku.hpp Sudoku/SudokuOptions.cpp Sudoku/SudokuOptions.hpp)
-add_executable(Sudoku ${SOURCE_FILES})
+set(SOURCE_FILES main.cpp)
+add_executable(sudoku_run main.cpp ${SOURCE_FILES})
+
+include_directories(sudoku)
+
+add_subdirectory(sudou)
+add_subdirectory(sudoku_tests)
+
+target_link_libraries(sudoku_run sudoku_tests)

@@ -1,7 +1,7 @@
 // Copyright 2017 Timothy Oltjenbruns
 
-#ifndef SUDOKU_SUDOKU_H_
-#define SUDOKU_SUDOKU_H_
+#ifndef SUDOKU_SUDOKU_HPP_
+#define SUDOKU_SUDOKU_HPP_
 
 /// A Sudoku puzzle
 class Sudoku {
@@ -65,4 +65,4 @@ class Sudoku {
   static bool operator==(const Sudoku& one, const Sudoku& two) const;
 };
 
-#endif //SUDOKU_SUDOKU_H_
+#endif  // SUDOKU_SUDOKU_HPP_
