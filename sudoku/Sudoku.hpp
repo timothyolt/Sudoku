@@ -58,11 +58,10 @@ class Sudoku {
   /// @returns Whether the other @p _puzzle's values match this one's
   bool equal(const Sudoku& other) const;
 
-  /// Determines if two puzzles contain the same values
-  /// @param[in] one First puzzle
-  /// @param[in] two Second puzzle
-  /// @returns Whether the puzzles' values match
-  static bool operator==(const Sudoku& one, const Sudoku& two) const;
+  /// Determines if this @p _puzzle contains the same values as the other @p _puzzle
+  /// @param[in] other Reference to another puzzle
+  /// @returns Whether the other @p _puzzle's values match this one's
+  bool operator==(const Sudoku& other) const;
 };
 
 #endif  // SUDOKU_SUDOKU_HPP_

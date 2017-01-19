@@ -70,6 +70,6 @@ bool Sudoku::equal(const Sudoku& other) const {
   return true;
 }
 
-bool Sudoku::operator==(const Sudoku& one, const Sudoku& two) const {
-  return one.equal(two);
+bool Sudoku::operator==(const Sudoku& other) const {
+  return equal(other);
 }
