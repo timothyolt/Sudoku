@@ -67,6 +67,8 @@ bool Sudoku::equal(const Sudoku& other) const {
   for (auto i(0); i < 9; i++)
     if (!std::equal(_puzzle[i], _puzzle[i] + 9, other._puzzle[i]))
       return false;
+  // intentionally jacking up my build
+  Sudoku* a = new Sudoku();
   return true;
 }
 
