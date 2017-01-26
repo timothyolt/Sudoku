@@ -1,5 +1,5 @@
 projectKey=com.timothyolt:sudoku
 serverUrl=http://localhost:9000
 dashboardUrl=http://localhost:9000/dashboard/index/com.timothyolt:sudoku
-ceTaskId=AVnOfFj7hyg91rPGEM5q
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AVnOfFj7hyg91rPGEM5q
+ceTaskId=AVnc7blg8uXuf_DsOIu9
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AVnc7blg8uXuf_DsOIu9
