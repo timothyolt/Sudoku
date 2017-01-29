@@ -1,11 +1,12 @@
 // Copyright 2017 Timothy Oltjenbruns
 
-#include <Sudoku.hpp>
+#include <unistd.h>
 #include <iostream>
 #include <fstream>
 #include <cstring>
 #include <sstream>
 #include <algorithm>
+#include <Sudoku.hpp>
 
 int help() {
   std::cout
@@ -43,6 +44,7 @@ int write() {
 }
 
 int play(char* filename) {
+
   return 0;
 }
 
@@ -74,6 +76,8 @@ int menuInput() {
   if (inputString.find("thermonuclear") != std::string::npos ||
       inputString.find("Thermonuclear") != std::string::npos ) {
     std::cout << "I'm sorry Dave, I'm afraid I can't do that." << std::endl;
+    sleep(1);
+    std::cout << "If one reference wasn't enough, two should be sufficient." << std::endl;
     return 0;
   }
   int argCount = static_cast<int>(std::count(inputString.begin(), inputString.end(), ' ') + 1);
