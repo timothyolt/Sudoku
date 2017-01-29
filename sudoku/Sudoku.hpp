@@ -3,16 +3,19 @@
 #ifndef SUDOKU_SUDOKU_HPP_
 #define SUDOKU_SUDOKU_HPP_
 
+#include <ostream>
 /// A Sudoku puzzle
 class Sudoku {
  public:
-  typedef unsigned int size_t;
+  typedef int size_t;
   typedef int value_t;
 
  protected:
   /// @brief 9 by 9 array storing the puzzle state
   /// Values are stored left to right then top to bottom and default to 0
   value_t _puzzle[9][9];
+
+  static void streamHRule(std::ostream &os, int length);
 
  public:
   /// Instantiates a Sudoku @p _puzzle with every value marked as unset (0)
@@ -62,6 +65,10 @@ class Sudoku {
   /// @param[in] other Reference to another puzzle
   /// @returns Whether the other @p _puzzle's values match this one's
   bool operator==(const Sudoku& other) const;
+
+  friend std::ostream &operator<<(std::ostream &os, const Sudoku &sudoku);
+
+  friend std::istream &operator>>(std::istream &is, Sudoku &sudoku);
 };
 
 #endif  // SUDOKU_SUDOKU_HPP_
