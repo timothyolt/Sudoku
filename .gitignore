@@ -28,4 +28,6 @@
 *.app
 
 cmake-build-debug/*
+cmake-build-analysis/*
 .idea/workspace.xml
+.sonar/*

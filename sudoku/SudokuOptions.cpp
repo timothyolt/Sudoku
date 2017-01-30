@@ -2,6 +2,7 @@
 
 #include "SudokuOptions.hpp"
 #include <assert.h>
+#include <algorithm>
 
 SudokuOptions::ValueNode::~ValueNode()  {
   if (next == nullptr) return;
@@ -28,6 +29,20 @@ SudokuOptions::SudokuOptions() :
      {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
      {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
   }  { }
+
+SudokuOptions::SudokuOptions(const Sudoku& copy) :
+    Sudoku(copy),
+    _options {
+        {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+        {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+        {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+        {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+        {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+        {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+        {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+        {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+        {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+    }  { }
 
 SudokuOptions::~SudokuOptions() {
   for (auto row(0); row < 9; ++row) {
@@ -66,13 +81,16 @@ void SudokuOptions::remove(Sudoku::size_t row, Sudoku::size_t column, Sudoku::va
   cursor->next = ValueNode::remove(cursor->next);
 }
 
-void SudokuOptions::finalize(Sudoku::size_t row, Sudoku::size_t column) {
+bool SudokuOptions::finalize(Sudoku::size_t row, Sudoku::size_t column) {
   assert(row >= 0 && row < 9);
   assert(column >= 0 && column < 9);
-  ValueNode* option(_options[row][column]);
-  assert(option != nullptr && option->value != 0 && option->next == nullptr);
   assert(_puzzle[row][column] == 0);
+  ValueNode* option(_options[row][column]);
+  // assert(option != nullptr && option->value != 0 && option->next == nullptr);
+  if (option == nullptr || option->value == 0 || option->next != nullptr)
+    return false;
   _puzzle[row][column] = option->value;
+  return true;
 }
 
 bool SudokuOptions::containsOptions(Sudoku::size_t row, Sudoku::size_t column, Sudoku::value_t value) const {

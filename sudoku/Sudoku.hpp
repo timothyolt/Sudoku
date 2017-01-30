@@ -3,10 +3,11 @@
 #ifndef SUDOKU_SUDOKU_HPP_
 #define SUDOKU_SUDOKU_HPP_
 
+#include <ostream>
 /// A Sudoku puzzle
 class Sudoku {
  public:
-  typedef unsigned int size_t;
+  typedef int size_t;
   typedef int value_t;
 
  protected:
@@ -14,9 +15,13 @@ class Sudoku {
   /// Values are stored left to right then top to bottom and default to 0
   value_t _puzzle[9][9];
 
+  static void streamHRule(std::ostream &os, int length);
+
  public:
   /// Instantiates a Sudoku @p _puzzle with every value marked as unset (0)
   Sudoku();
+
+  Sudoku(const Sudoku& copy);
 
   /// Set @p _puzzle value for specified position
   /// @param[in] row [0...8] Top to bottom
@@ -53,6 +58,14 @@ class Sudoku {
   /// @returns   Whether the @p value was found in the @p grid
   bool containsGrid(size_t grid, value_t value) const;
 
+  /// Searches a grid of the @p _puzzle for a value using row and column to infer grid
+  /// @param[in] row [0...8] Top to bottom
+  /// @param[in] column [0...8] Left to right
+  /// @param[in] value [0...9] Sudoku value to search for.
+  ///            0 represents an default or unset value.
+  /// @returns   Whether the @p value was found in the @p grid
+  bool containsGrid(size_t row, size_t column, value_t value) const;
+
   /// Determines if this @p _puzzle contains the same values as the other @p _puzzle
   /// @param[in] other Reference to another puzzle
   /// @returns Whether the other @p _puzzle's values match this one's
@@ -62,6 +75,10 @@ class Sudoku {
   /// @param[in] other Reference to another puzzle
   /// @returns Whether the other @p _puzzle's values match this one's
   bool operator==(const Sudoku& other) const;
+
+  friend std::ostream &operator<<(std::ostream &os, const Sudoku &sudoku);
+
+  friend std::istream &operator>>(std::istream &is, Sudoku &sudoku);
 };
 
 #endif  // SUDOKU_SUDOKU_HPP_
