@@ -21,6 +21,8 @@ class Sudoku {
   /// Instantiates a Sudoku @p _puzzle with every value marked as unset (0)
   Sudoku();
 
+  Sudoku(const Sudoku& copy);
+
   /// Set @p _puzzle value for specified position
   /// @param[in] row [0...8] Top to bottom
   /// @param[in] column [0...8] Left to right
@@ -55,6 +57,14 @@ class Sudoku {
   ///            0 represents an default or unset value.
   /// @returns   Whether the @p value was found in the @p grid
   bool containsGrid(size_t grid, value_t value) const;
+
+  /// Searches a grid of the @p _puzzle for a value using row and column to infer grid
+  /// @param[in] row [0...8] Top to bottom
+  /// @param[in] column [0...8] Left to right
+  /// @param[in] value [0...9] Sudoku value to search for.
+  ///            0 represents an default or unset value.
+  /// @returns   Whether the @p value was found in the @p grid
+  bool containsGrid(size_t row, size_t column, value_t value) const;
 
   /// Determines if this @p _puzzle contains the same values as the other @p _puzzle
   /// @param[in] other Reference to another puzzle

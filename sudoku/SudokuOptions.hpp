@@ -5,7 +5,7 @@
 
 #include "Sudoku.hpp"
 
-class SudokuOptions : Sudoku {
+class SudokuOptions : public Sudoku {
  private:
   /// Node for creating a linked list of @p _options at a @p _puzzle position
   class ValueNode {
@@ -34,6 +34,8 @@ class SudokuOptions : Sudoku {
   /// Creates a blank Sudoku puzzle with empty @p options
   SudokuOptions();
 
+  explicit SudokuOptions(const Sudoku& from);
+
   /// Removes and deletes all options
   ~SudokuOptions();
 
@@ -52,11 +54,11 @@ class SudokuOptions : Sudoku {
   void remove(size_t row, size_t column, value_t value);
 
   /// Copies the single @p option at a location and sets it to the value on the @p puzzle
-  /// @pre There must only be only one option at the location.
   /// @pre The value at the location must be unset or default (0).
   /// @param[in] row [0...8] Top to bottom
   /// @param[in] column [0...8] Left to right
-  void finalize(size_t row, size_t column);
+  /// @returns Whether there was only one option and it was placed
+  bool finalize(size_t row, size_t column);
 
   /// Searches a row of the puzzle for a value
   /// @param[in] row [0...8] Top to bottom

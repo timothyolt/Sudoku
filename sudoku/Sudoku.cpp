@@ -18,6 +18,11 @@ Sudoku::Sudoku() :
     {0, 0, 0, 0, 0, 0, 0, 0, 0},
   }  { }
 
+Sudoku::Sudoku(const Sudoku &copy) {
+  for (auto i(0); i < 9; i++)
+    std::copy(copy._puzzle[i], copy._puzzle[i] + 9, _puzzle[i]);
+}
+
 void Sudoku::set(Sudoku::size_t row, Sudoku::size_t column, Sudoku::value_t value) {
   assert(row >= 0 && row < 9);
   assert(column >= 0 && column < 9);
@@ -62,6 +67,10 @@ bool Sudoku::containsGrid(Sudoku::size_t grid, Sudoku::value_t value) const {
     if (_puzzle[rowOffset + i % 3][columnOffset + i / 3] == value)
       return true;
   return false;
+}
+
+bool Sudoku::containsGrid(Sudoku::size_t row, Sudoku::size_t column, Sudoku::value_t value) const {
+  return containsGrid(row % 3 + column / 3, value);
 }
 
 bool Sudoku::equal(const Sudoku& other) const {

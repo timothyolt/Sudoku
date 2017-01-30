@@ -7,6 +7,7 @@
 #include <sstream>
 #include <algorithm>
 #include <Sudoku.hpp>
+#include <OptionsSolver.hpp>
 
 int help() {
   std::cout
@@ -44,7 +45,18 @@ int write() {
 }
 
 int play(char* filename) {
-
+  Sudoku puzzle;
+  std::ifstream file;
+  file.open(std::string(filename) + ".pzl.txt");
+  if (!file.is_open()) {
+    std::cout << "File not found." << std::endl;
+    return 0;
+  }
+  file >> puzzle;
+  file.close();
+  std::cout << puzzle << std::endl;
+  Sudoku solved = OptionsSolver::solve(puzzle);
+  std::cout << solved << std::endl;
   return 0;
 }
 
