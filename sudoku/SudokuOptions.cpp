@@ -133,7 +133,7 @@ bool SudokuOptions::finalize(Sudoku::size_t row, Sudoku::size_t column) {
   value_t value(option->value);
   removeOptionsRow(row, value);
   removeOptionsColumn(column, value);
-  removeOptionsGrid(row, column, value);
+  //removeOptionsGrid(row, column, value);
   _puzzle[row][column] = value;
   // Remove placed option from row, column, grid
   return true;
@@ -146,8 +146,8 @@ int SudokuOptions::solve() {
       if (get(row, column) == 0)
         for (int value(1); value <= 9; ++value)
           if (!containsRow(row, value) &&
-              !containsColumn(column, value) &&
-              !containsGrid(row, column, value))
+              !containsColumn(column, value) )//&&
+              //!containsGrid(row, column, value))
             add(row, column, value);
   // Iteratively finalize until no more placements are yielded
   int placed(0), placedI(0);
