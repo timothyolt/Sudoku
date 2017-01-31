@@ -54,7 +54,7 @@ int play(char* filename) {
   }
   file >> puzzle;
   file.close();
-  std::cout << puzzle << std::endl;
+  std::cout << "Puzzle: " << puzzle << std::endl;
   SudokuOptions solved(puzzle);
   std::cout << "Placed " << solved.solve() << " numbers!" << std::endl;
   std::cout << "Solved:" << std::endl << solved << std::endl;
