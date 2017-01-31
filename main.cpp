@@ -7,7 +7,7 @@
 #include <sstream>
 #include <algorithm>
 #include <Sudoku.hpp>
-#include <OptionsSolver.hpp>
+#include <SudokuOptions.hpp>
 
 int help() {
   std::cout
@@ -55,7 +55,8 @@ int play(char* filename) {
   file >> puzzle;
   file.close();
   std::cout << puzzle << std::endl;
-  Sudoku solved = OptionsSolver::solve(puzzle);
+  SudokuOptions solved(puzzle);
+  solved.solve();
   std::cout << solved << std::endl;
   return 0;
 }

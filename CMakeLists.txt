@@ -12,6 +12,8 @@ endif()
 
 add_executable(run_sudoku main.cpp)
 
+file(COPY "puzzles" DESTINATION "${CMAKE_BINARY_DIR}")
+
 include_directories(sudoku)
 
 add_subdirectory(sudoku)
