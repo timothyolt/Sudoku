@@ -9,9 +9,12 @@ SudokuOptions::ValueNode::~ValueNode()  {
   while ((next = remove(next)) != nullptr) continue;
 }
 
-SudokuOptions::ValueNode *SudokuOptions::ValueNode::remove(SudokuOptions::ValueNode *target) {
+SudokuOptions::ValueNode* SudokuOptions::ValueNode::remove(SudokuOptions::ValueNode* target) {
   assert(target != nullptr);
+  // Store next node to return
   ValueNode* next = target->next;
+  // Prevent deleting its children
+  target->next = nullptr;
   delete target;
   return next;
 }
