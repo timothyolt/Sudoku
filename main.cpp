@@ -56,8 +56,18 @@ int play(char* filename) {
   file.close();
   std::cout << puzzle << std::endl;
   SudokuOptions solved(puzzle);
-  solved.solve();
-  std::cout << solved << std::endl;
+  std::cout << "Placed " << solved.solve() << " numbers!" << std::endl;
+  std::cout << "Solved:" << std::endl << solved << std::endl;
+  Sudoku solution;
+  file.open(std::string(filename) + ".sol.pzl.txt");
+  if (!file.is_open()) {
+    std::cout << "Solution file not found." << std::endl;
+    return 0;
+  }
+  file >> solution;
+  file.close();
+  std::cout << "Placed " << solved.diff(solution) << " incorrect numbers!" << std::endl;
+  std::cout << "Solution:" << std::endl << solution << std::endl;
   return 0;
 }
 

@@ -139,7 +139,7 @@ bool SudokuOptions::finalize(Sudoku::size_t row, Sudoku::size_t column) {
   return true;
 }
 
-void SudokuOptions::solve() {
+int SudokuOptions::solve() {
   // Generate initial options
   for (int row(0); row < 9; ++row)
     for (int column(0); column < 9; ++column)
@@ -159,8 +159,7 @@ void SudokuOptions::solve() {
         if (get(row, column) == 0 && finalize(row, column))
           ++placedI;
   } while (placedI != 0);
-
-  std::cout << "Placed " << placed << " numbers" << std::endl;
+  return placed;
 }
 
 bool SudokuOptions::containsOptions(Sudoku::size_t row, Sudoku::size_t column, Sudoku::value_t value) const {

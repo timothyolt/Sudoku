@@ -73,6 +73,16 @@ bool Sudoku::containsGrid(Sudoku::size_t row, Sudoku::size_t column, Sudoku::val
   return containsGrid(row % 3 + column / 3, value);
 }
 
+int Sudoku::diff(const Sudoku& other) const {
+  int diff(0);
+  for (auto row(0); row < 9; ++row)
+    for (auto column(0); column < 9; ++column)
+      if (get(row, column) != 0 && other.get(row, column) != 0
+          && get(row, column) != other.get(row, column))
+        ++diff;
+  return diff;
+}
+
 bool Sudoku::equal(const Sudoku& other) const {
   for (auto i(0u); i < 9; i++)
     if (!std::equal(_puzzle[i], _puzzle[i] + 9, other._puzzle[i]))
