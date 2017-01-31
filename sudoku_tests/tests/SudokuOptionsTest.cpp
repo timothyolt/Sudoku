@@ -51,7 +51,7 @@ TEST(SudokuOptionsTest, SolveMedium209) {
   file >> solution;
   file.close();
   SudokuOptions solved(puzzle);
-  EXPECT_EQ(58, solved.solve());
+  EXPECT_EQ(57, solved.solve());
   EXPECT_EQ(0, solved.diff(solution));
 }
 
@@ -86,5 +86,39 @@ TEST(SudokuOptionsTest, SolveMedium222) {
   file.close();
   SudokuOptions solved(puzzle);
   EXPECT_EQ(58, solved.solve());
+  EXPECT_EQ(0, solved.diff(solution));
+}
+
+TEST(SudokuOptionsTest, SolveHard241) {
+  Sudoku puzzle;
+  Sudoku solution;
+  std::ifstream file;
+  file.open("../../puzzles/hard/241.pzl.txt");
+  ASSERT_TRUE(file.is_open());
+  file >> puzzle;
+  file.close();
+  file.open("../../puzzles/hard/241.sol.pzl.txt");
+  ASSERT_TRUE(file.is_open());
+  file >> solution;
+  file.close();
+  SudokuOptions solved(puzzle);
+  EXPECT_EQ(59, solved.solve());
+  EXPECT_EQ(0, solved.diff(solution));
+}
+
+TEST(SudokuOptionsTest, SolveHard242) {
+  Sudoku puzzle;
+  Sudoku solution;
+  std::ifstream file;
+  file.open("../../puzzles/hard/242.pzl.txt");
+  ASSERT_TRUE(file.is_open());
+  file >> puzzle;
+  file.close();
+  file.open("../../puzzles/hard/242.sol.pzl.txt");
+  ASSERT_TRUE(file.is_open());
+  file >> solution;
+  file.close();
+  SudokuOptions solved(puzzle);
+  EXPECT_EQ(59, solved.solve());
   EXPECT_EQ(0, solved.diff(solution));
 }

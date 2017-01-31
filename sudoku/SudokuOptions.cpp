@@ -133,7 +133,7 @@ bool SudokuOptions::finalize(Sudoku::size_t row, Sudoku::size_t column) {
   value_t value(option->value);
   // Rules 8-10: If an option is the only instance of a value possible
   if (option->next != nullptr) {
-    ValueNode* node = option->next;
+    ValueNode* node = option;
     while (node != nullptr) {
       value = node->value;
       if (soloOptionsRow(row, value))
