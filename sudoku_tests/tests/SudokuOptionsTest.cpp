@@ -1,29 +1,39 @@
 // Copyright 2017 Timothy Oltjenbruns
 
-#include <SudokuOptions.hpp>
 #include <fstream>
+#include <SudokuOptions.hpp>
 #include "gtest/gtest.h"
 
-class SudokuOptionsTest : public ::testing::Test {
- protected:
-  virtual void SetUp() {
-    _sudoku = SudokuOptions();
-  }
-  virtual void TearDown() {
-    _sudoku.~SudokuOptions();
-  }
-  SudokuOptions _sudoku;
-};
-
-TEST_F(SudokuOptionsTest, SolveEasy133) {
+TEST(SudokuOptionsTest, SolveEasy133) {
   Sudoku puzzle;
+  Sudoku solution;
   std::ifstream file;
   file.open("../../puzzles/easy/133.pzl.txt");
   ASSERT_TRUE(file.is_open());
   file >> puzzle;
   file.close();
-  std::cout << puzzle << std::endl;
+  file.open("../../puzzles/easy/133.sol.pzl.txt");
+  ASSERT_TRUE(file.is_open());
+  file >> solution;
+  file.close();
   SudokuOptions solved(puzzle);
-  solved.solve();
-  std::cout << solved << std::endl;
+  EXPECT_EQ(55, solved.solve());
+  EXPECT_EQ(0, solved.diff(solution));
+}
+
+TEST(SudokuOptionsTest, SolveEasy134) {
+  Sudoku puzzle;
+  Sudoku solution;
+  std::ifstream file;
+  file.open("../../puzzles/easy/134.pzl.txt");
+  ASSERT_TRUE(file.is_open());
+  file >> puzzle;
+  file.close();
+  file.open("../../puzzles/easy/134.sol.pzl.txt");
+  ASSERT_TRUE(file.is_open());
+  file >> solution;
+  file.close();
+  SudokuOptions solved(puzzle);
+  EXPECT_EQ(53, solved.solve());
+  EXPECT_EQ(0, solved.diff(solution));
 }
