@@ -2,8 +2,6 @@
 
 #include "SudokuOptions.hpp"
 #include <assert.h>
-#include <algorithm>
-#include <iostream>
 
 SudokuOptions::ValueNode::~ValueNode()  {
   if (next == nullptr) return;
