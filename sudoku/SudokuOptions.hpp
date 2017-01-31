@@ -74,6 +74,11 @@ class SudokuOptions : public Sudoku {
   /// @param[in] value [1...9] Sudoku value to search for.
   /// @returns   Whether the @p value was found in the @p _options at @p row and @p column
   bool containsOptions(size_t row, size_t column, value_t value) const;
+
+  bool soloOptionsRow(Sudoku::size_t row, Sudoku::value_t value) const;
+  bool soloOptionsColumn(Sudoku::size_t column, Sudoku::value_t value) const;
+  bool soloOptionsGrid(Sudoku::size_t grid, Sudoku::value_t value) const;
+  bool soloOptionsGrid(Sudoku::size_t row, Sudoku::size_t column, Sudoku::value_t value) const;
 };
 
 #endif  // SUDOKU_SUDOKUOPTIONS_HPP_
