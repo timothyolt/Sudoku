@@ -66,6 +66,8 @@ class Sudoku {
   /// @returns   Whether the @p value was found in the @p grid
   bool containsGrid(size_t row, size_t column, value_t value) const;
 
+  int diff(const Sudoku& other) const;
+
   /// Determines if this @p _puzzle contains the same values as the other @p _puzzle
   /// @param[in] other Reference to another puzzle
   /// @returns Whether the other @p _puzzle's values match this one's

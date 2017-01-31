@@ -40,8 +40,8 @@ bool Sudoku::containsRow(Sudoku::size_t row, Sudoku::value_t value) const {
   assert(row >= 0 && row < 9);
   assert(value >= 0 && value <= 9);
   // Linear search a row
-  for (auto i(0u); i < 9; i++)
-    if (_puzzle[row][i] == value)
+  for (auto column(0); column < 9; column++)
+    if (_puzzle[row][column] == value)
       return true;
   return false;
 }
@@ -50,8 +50,8 @@ bool Sudoku::containsColumn(Sudoku::size_t column, Sudoku::value_t value) const 
   assert(column >= 0 && column < 9);
   assert(value >= 0 && value <= 9);
   // Linear search a column
-  for (auto i(0u); i < 9; i++)
-    if (_puzzle[i][column] == value)
+  for (auto row(0); row < 9; row++)
+    if (_puzzle[row][column] == value)
       return true;
   return false;
 }
@@ -61,20 +61,30 @@ bool Sudoku::containsGrid(Sudoku::size_t grid, Sudoku::value_t value) const {
   assert(value >= 0 && value <= 9);
   // Linear search a grid
   // Wrap search top to bottom
-  auto rowOffset(grid % 3);
-  auto columnOffset(grid / 3);
-  for (auto i(0u); i < 9; i++)
-    if (_puzzle[rowOffset + i % 3][columnOffset + i / 3] == value)
+  auto rowOffset((grid / 3) * 3);
+  auto columnOffset((grid % 3) * 3);
+  for (auto i(0); i < 9; i++)
+    if (_puzzle[rowOffset + i / 3][columnOffset + i % 3] == value)
       return true;
   return false;
 }
 
 bool Sudoku::containsGrid(Sudoku::size_t row, Sudoku::size_t column, Sudoku::value_t value) const {
-  return containsGrid(row % 3 + column / 3, value);
+  return containsGrid((row / 3 * 3) + column / 3, value);
+}
+
+int Sudoku::diff(const Sudoku& other) const {
+  int diff(0);
+  for (auto row(0); row < 9; ++row)
+    for (auto column(0); column < 9; ++column)
+      if (get(row, column) != 0 && other.get(row, column) != 0
+          && get(row, column) != other.get(row, column))
+        ++diff;
+  return diff;
 }
 
 bool Sudoku::equal(const Sudoku& other) const {
-  for (auto i(0u); i < 9; i++)
+  for (auto i(0); i < 9; i++)
     if (!std::equal(_puzzle[i], _puzzle[i] + 9, other._puzzle[i]))
       return false;
   return true;
@@ -85,11 +95,11 @@ bool Sudoku::operator==(const Sudoku& other) const {
 }
 
 std::ostream &operator<<(std::ostream &os, const Sudoku &sudoku) {
-  for (auto row(0u); row < 9; row++) {
+  for (auto row(0); row < 9; row++) {
     // Stream a horizontal rule every 3 rows
     if (row % 3 == 0)
       Sudoku::streamHRule(os, 25);
-    for (auto column(0u); column < 9; column++) {
+    for (auto column(0); column < 9; column++) {
       // Stream a vertical rule every 3 columns
       if (column % 3 == 0)
         os << "| ";
@@ -118,9 +128,9 @@ std::istream &operator>>(std::istream &is, Sudoku &sudoku) {
   // a line should contain either no numbers or exactly 9 numbers, and up to 13 * 9 junk characters
   char line[126];
   int numLine[9];
-  int l = 0;
+  int row = 0;
   int n = 0;
-  while (l < 9) {
+  while (row < 9) {
     // clear line array with non-digits
     for (auto i(0); i < 126; i++)
       line[i] = 'x';
@@ -137,9 +147,9 @@ std::istream &operator>>(std::istream &is, Sudoku &sudoku) {
     if (n > 9) throw std::overflow_error("Too many digits on a line. Must be exactly 0 or 9.");
     if (n == 9) {
       // set sudoku line
-      for (auto i(0u); i < 9; i++)
-        sudoku.set(l, i, numLine[i]);
-      l++;
+      for (auto column(0); column < 9; column++)
+        sudoku.set(row, column, numLine[column]);
+      row++;
     }
   }
   return is;

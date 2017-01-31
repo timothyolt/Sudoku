@@ -109,17 +109,17 @@ int SudokuOptions::removeOptionsColumn(Sudoku::size_t column, Sudoku::value_t va
 int SudokuOptions::removeOptionsGrid(Sudoku::size_t grid, Sudoku::value_t value) {
   assert(grid >= 0 && grid < 9);
   assert(value > 0 && value <= 9);
-  auto rowOffset(grid % 3);
-  auto columnOffset(grid / 3);
+  auto rowOffset((grid / 3) * 3);
+  auto columnOffset((grid % 3) * 3);
   int removed(0);
   for (auto i(0); i < 9; ++i)
-    if (remove(rowOffset + i % 3, columnOffset + i / 3, value))
+    if (remove(rowOffset + i / 3, columnOffset + i % 3, value))
       ++removed;
   return removed;
 }
 
 int SudokuOptions::removeOptionsGrid(Sudoku::value_t row, Sudoku::value_t column, Sudoku::value_t value) {
-  return removeOptionsGrid(row % 3 + column / 3, value);
+  return removeOptionsGrid((row / 3 * 3) + column / 3, value);
 }
 
 bool SudokuOptions::finalize(Sudoku::size_t row, Sudoku::size_t column) {
@@ -139,7 +139,7 @@ bool SudokuOptions::finalize(Sudoku::size_t row, Sudoku::size_t column) {
   return true;
 }
 
-void SudokuOptions::solve() {
+int SudokuOptions::solve() {
   // Generate initial options
   for (int row(0); row < 9; ++row)
     for (int column(0); column < 9; ++column)
@@ -159,8 +159,7 @@ void SudokuOptions::solve() {
         if (get(row, column) == 0 && finalize(row, column))
           ++placedI;
   } while (placedI != 0);
-
-  std::cout << "Placed " << placed << " numbers" << std::endl;
+  return placed;
 }
 
 bool SudokuOptions::containsOptions(Sudoku::size_t row, Sudoku::size_t column, Sudoku::value_t value) const {

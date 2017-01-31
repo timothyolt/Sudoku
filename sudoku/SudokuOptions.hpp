@@ -65,7 +65,7 @@ class SudokuOptions : public Sudoku {
   /// @returns Whether there was only one option and it was placed
   bool finalize(size_t row, size_t column);
 
-  void solve();
+  int solve();
 
 
   /// Searches a row of the puzzle for a value
