@@ -146,8 +146,8 @@ int SudokuOptions::solve() {
       if (get(row, column) == 0)
         for (int value(1); value <= 9; ++value)
           if (!containsRow(row, value) &&
-              !containsColumn(column, value) )//&&
-              //!containsGrid(row, column, value))
+              !containsColumn(column, value) &&
+              !containsGrid(row, column, value))
             add(row, column, value);
   // Iteratively finalize until no more placements are yielded
   int placed(0), placedI(0);
