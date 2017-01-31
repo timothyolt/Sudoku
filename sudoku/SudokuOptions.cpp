@@ -131,7 +131,7 @@ bool SudokuOptions::finalize(Sudoku::size_t row, Sudoku::size_t column) {
   if (option == nullptr || option->value == 0)
     return false;
   value_t value(option->value);
-  // Rules 7-9: If an option is the only instance of a value possible
+  // Rules 8-10: If an option is the only instance of a value possible
   if (option->next != nullptr) {
     ValueNode* node = option->next;
     while (node != nullptr) {
@@ -148,7 +148,7 @@ bool SudokuOptions::finalize(Sudoku::size_t row, Sudoku::size_t column) {
     delete _options[row][column];
     _options[row][column] = nullptr;
   }
-  // Rule 4-6: remove other related options when finalizing
+  // Rule 5-7: remove other related options when finalizing
   removeOptionsRow(row, value);
   removeOptionsColumn(column, value);
   removeOptionsGrid(row, column, value);
