@@ -70,7 +70,7 @@ bool Sudoku::containsGrid(Sudoku::size_t grid, Sudoku::value_t value) const {
 }
 
 bool Sudoku::containsGrid(Sudoku::size_t row, Sudoku::size_t column, Sudoku::value_t value) const {
-  return containsGrid(row % 3 + column / 3, value);
+  return containsGrid(row / 3 + column % 3, value);
 }
 
 int Sudoku::diff(const Sudoku& other) const {
