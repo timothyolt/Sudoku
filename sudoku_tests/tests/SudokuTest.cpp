@@ -8,6 +8,10 @@ class SudokuTest : public ::testing::Test {
   virtual void SetUp() {
     _sudoku = Sudoku();
   }
+  virtual void TearDown() {
+    _sudoku.~Sudoku();
+  }
+
   Sudoku _sudoku;
 };
 

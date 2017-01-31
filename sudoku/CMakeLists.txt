@@ -3,6 +3,6 @@ project(sudoku)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES Sudoku.hpp SudokuOptions.hpp Sudoku.cpp SudokuOptions.cpp OptionsSolver.cpp OptionsSolver.hpp)
+set(SOURCE_FILES Sudoku.hpp SudokuOptions.hpp Sudoku.cpp SudokuOptions.cpp)
 
 add_library(sudoku STATIC ${SOURCE_FILES})

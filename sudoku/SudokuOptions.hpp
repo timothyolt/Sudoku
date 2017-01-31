@@ -51,7 +51,12 @@ class SudokuOptions : public Sudoku {
   /// @param[in] row [0...8] Top to bottom
   /// @param[in] column [0...8] Left to right
   /// @param[in] value [1...9] Sudoku value to remove.
-  void remove(size_t row, size_t column, value_t value);
+  bool remove(size_t row, size_t column, value_t value);
+
+  int removeOptionsRow(Sudoku::value_t row, value_t value);
+  int removeOptionsColumn(Sudoku::value_t column, value_t value);
+  int removeOptionsGrid(Sudoku::value_t grid, value_t value);
+  int removeOptionsGrid(Sudoku::value_t row, Sudoku::value_t column, value_t value);
 
   /// Copies the single @p option at a location and sets it to the value on the @p puzzle
   /// @pre The value at the location must be unset or default (0).
@@ -59,6 +64,9 @@ class SudokuOptions : public Sudoku {
   /// @param[in] column [0...8] Left to right
   /// @returns Whether there was only one option and it was placed
   bool finalize(size_t row, size_t column);
+
+  void solve();
+
 
   /// Searches a row of the puzzle for a value
   /// @param[in] row [0...8] Top to bottom
